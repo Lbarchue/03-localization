@@ -1,0 +1,222 @@
+/* Basic page reset and typography */
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0; /* remove page margin so hero can span exactly half the viewport */
+	color: #222;
+	background-color: #d0d0d0; /* darker grey page background */
+	display: flex;
+	flex-direction: column;
+	align-items: stretch; /* allow full-width hero */
+}
+
+/* Header / Hero: center logo and text */
+header > div {
+	text-align: center;
+}
+
+header img {
+	display: block;
+	margin: 0 auto 12px;
+}
+
+/* Two-photo collage banner for the hero (fills top half) */
+.hero-banner {
+	position: relative;
+	width: 100%;
+	height: 50vh; /* occupy the top half of the viewport */
+	overflow: hidden;
+	margin-bottom: 30px; /* add 30px spacing under hero */
+	display: flex;
+	align-items: center;
+	justify-content: center; /* keep overlay content centered */
+}
+
+/* Left / right halves use background-size: cover so images keep aspect ratio */
+.hero-side {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 50%;
+	background-repeat: no-repeat;
+	background-size: cover; /* preserves aspect ratio, may crop */
+	background-position: center;
+}
+.hero-side.left {
+	left: 0;
+	background-image: url('img/robert-noyce-building-2.jpg');
+}
+.hero-side.right {
+	right: 0;
+	background-image: url('img/Intel_Headquarters_2023_960.jpg');
+}
+
+.hero-content {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	text-align: center;
+	background: rgba(3,102,214,0.24); /* semi-transparent blue */
+	color: #ffffff;
+	padding: 14px 18px;
+	border-radius: 8px;
+	max-width: 780px;
+}
+
+/* Ensure the subheading (header paragraph) is centered and slightly separated */
+.hero-content p {
+	max-width: 720px;
+	margin: 8px auto 0;
+	color: #ffffff;
+	text-align: center; /* center subheading */
+}
+.hero-content img {
+	max-width: 160px;
+	height: auto;
+	margin-bottom: 8px;
+}
+
+/* Timeline layout: horizontally scrollable row showing 4 cards */
+section {
+	display: flex;
+	flex-direction: row;
+	gap: 20px; /* 20px between each card */
+	flex-wrap: nowrap; /* keep a single row and scroll to see more */
+	align-items: flex-start;
+	justify-content: flex-start; /* left align so scroll behaves naturally */
+	margin: 30px auto 0; /* space under hero and center the scroller */
+	max-width: calc(200px * 4 + 20px * 3); /* show exactly 4 cards */
+	overflow-x: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+	scroll-snap-type: x mandatory;
+	padding: 8px;
+}
+
+/* Each timeline card: fixed square 200x200 */
+section > div {
+	width: 200px;
+	height: 200px;
+	box-sizing: border-box;
+	padding: 0; /* image fills card */
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	background: #fafafa;
+	overflow: hidden;
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
+	display: flex;
+	flex-direction: column;
+	position: relative; /* needed for absolute image and overlay */
+	flex: 0 0 auto; /* prevent shrinking when scrolling */
+	scroll-snap-align: start; /* snap to card start */
+}
+
+/* Small hover effect to make cards feel interactive */
+section > div:hover {
+	transform: translateY(-4px) scale(1.05);
+	box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+/* Image fills the card */
+section > div img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: 0;
+}
+
+/* Blue overlay on hover (keeps image visible underneath) */
+section > div::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 113, 197, 0.45);
+	opacity: 0;
+	transition: opacity 0.6s ease;
+	z-index: 1; /* below text but above image */
+	pointer-events: none;
+}
+section > div:hover::after {
+	opacity: 1;
+}
+
+/* Translucent white area behind the top third where the text sits */
+section > div::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 36%; /* roughly upper third */
+	background: rgba(255,255,255,0.8);
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	z-index: 2; /* above blue overlay */
+	pointer-events: none;
+	opacity: 1;
+	transition: opacity 0.25s ease;
+}
+/* Hide the white block on hover so the blue overlay shows through */
+section > div:hover::before {
+	opacity: 0;
+}
+
+/* Headings inside cards: keep them readable in the small square */
+section > div h2 {
+	margin: 0 0 6px 0;
+	font-size: 18px;
+	padding: 12px 12px 0 12px;
+	position: relative;
+	z-index: 3;
+	color: #000; /* black text on cards */
+	text-shadow: none;
+}
+section > div h3 {
+	margin: 0 0 8px 0;
+	font-size: 14px;
+	color: #000; /* black text on cards */
+	padding: 0 12px;
+	position: relative;
+	z-index: 3;
+}
+
+/* Small footer note styling */
+section + p {
+	margin-top: 18px;
+	text-align: center; /* center the small footer note */
+}
+
+/* Hide card descriptions until hover */
+section > div > p {
+	opacity: 0;
+	transition: opacity 0.18s ease;
+	margin-top: 8px;
+	padding: 0 12px 12px 12px;
+	position: relative;
+	z-index: 3;
+	color: #000; /* make descriptions black */
+	text-shadow: none;
+}
+
+/* Responsive: stack cards vertically on small screens */
+@media (max-width: 600px) {
+	section {
+		flex-direction: column;
+		max-width: none;
+		overflow: visible;
+		padding: 0;
+		align-items: center;
+		margin-top: 30px;
+	}
+	section > div {
+		margin: 10px 0; /* vertical spacing between stacked cards */
+		width: 200px; /* keep card size */
+	}
+}
+section > div:hover > p {
+	opacity: 1;
+}

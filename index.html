@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intel: Sustainability Through the Ages</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header / Hero Section (two-image collage occupying the top half) -->
+  <header class="hero-banner">
+    <div class="hero-side left"></div>
+    <div class="hero-side right"></div>
+    <div class="hero-content">
+      <img src="img/intel-header-logo.svg" alt="Intel Logo" />
+      <h1>
+        Sustainability Through the Ages
+      </h1>
+      <p>
+        Explore Intel's journey through time, discovering how our commitment
+        to innovation has shaped a more sustainable future for technology 
+        and our planet.
+      </p>
+    </div>
+  </header>
+
+  <!-- Timeline Cards Section -->
+  <section>
+
+    <!-- Card 1: 1968 -->
+    <div>
+      <h2>1968</h2>
+      <h3>Intel Founded</h3>
+      <img src="img/card1.jpg" alt="Intel founders" />
+      <p>
+        Robert Noyce and Gordon Moore rename NM Electronics to Intel Corporation, starting decades of innovation.
+      </p>
+    </div>
+
+    <!-- Card 2: 1971 -->
+    <div>
+      <h2>1971</h2>
+      <h3>First Microprocessor</h3>
+      <img src="img/first-microprocessor.jpg" alt="Intel 4004 microprocessor" />
+      <p>
+        Intel releases the 4004, the first commercial microprocessor.
+      </p>
+    </div>
+
+    <!-- Card 3: 1978 -->
+    <div>
+      <h2>1978</h2>
+      <h3>8086 Processor</h3>
+      <img src="img/card3.jpg" alt="8086 processor" />
+      <p>
+        The 8086 launches, establishing the x86 architecture for PCs and servers.
+      </p>
+    </div>
+
+    <!-- Card 4: 1985 -->
+    <div>
+      <h2>1985</h2>
+      <h3>386 Processor</h3>
+      <img src="img/card4.jpg" alt="386 processor" />
+      <p>
+        Intel introduces the 386, a 32-bit processor that boosted PC performance.
+      </p>
+    </div>
+
+    <!-- Card 5: 2006 -->
+    <div>
+      <h2>2006</h2>
+      <h3>Peak GHG Emissions</h3>
+      <img src="img/card5.jpg" alt="Peak emissions" />
+      <p>
+        Intel's greenhouse gas emissions peak; the company then invests in renewables and efficiency.
+      </p>
+    </div>
+
+    <!-- Card 6: 2020 -->
+    <div>
+      <h2>2020</h2>
+      <h3>RISE Strategy</h3>
+      <img src="img/card6.png" alt="RISE strategy" />
+      <p>
+        Intel launches the RISE strategy and 2030 sustainability goals.
+      </p>
+    </div>
+
+    <!-- Card 7: 2022 -->
+    <div>
+      <h2>2022</h2>
+      <h3>Net-Zero By 2040</h3>
+      <img src="img/card7.png" alt="Net zero" />
+      <p>
+        Intel commits to net-zero emissions by 2040 across its operations.
+      </p>
+    </div>
+
+    <!-- Card 8: 2023 -->
+    <div>
+      <h2>2023</h2>
+      <h3>Renewable Electricity</h3>
+      <img src="img/card8.png" alt="Renewable electricity" />
+      <p>
+        Intel achieves 99% renewable electricity usage worldwide.
+      </p>
+    </div>
+
+    <!-- Card 9: 2024 -->
+    <div>
+      <h2>2024</h2>
+      <h3>Sustainability Summit</h3>
+      <img src="img/card9.jpg" alt="Sustainability Summit" />
+      <p>
+        Intel hosts its first Sustainability Summit with suppliers, officials, and industry leaders.
+      </p>
+    </div>
+  </section>
+  <p>Scroll to view timeline | Hover over cards to learn more!</p>
+
+  <script>
+  // Enable vertical-wheel-to-horizontal-scroll on the timeline for desktop
+  (function(){
+    const scroller = document.querySelector('section');
+    if (!scroller) return;
+    const isSmall = () => window.innerWidth <= 600;
+    function onWheel(e){
+      if (isSmall()) return; // keep native scrolling on small screens
+      // if user is already doing horizontal scroll (trackpad), don't interfere
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      e.preventDefault();
+      scroller.scrollLeft += e.deltaY;
+    }
+    scroller.addEventListener('wheel', onWheel, {passive: false});
+  })();
+  </script>
+</body>
+</html>
